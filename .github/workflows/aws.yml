@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      RELEASE_REVISION: "${{ github.sha }}"
+      RELEASE_REVISION: "ping-rest-service-${{ github.sha }}"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -51,7 +51,7 @@ jobs:
       - name: Build & Push Image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}/ping-rest-service:${{ env.RELEASE_REVISION }}
+          RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
         run: |
           docker buildx create --use
 
