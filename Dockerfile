@@ -8,7 +8,7 @@ RUN MAVEN_OPTS=-Dorg.slf4j.simpleLogger.defaultLogLevel=warn mvn package && \
 jlink --add-modules java.base,java.compiler,java.instrument,java.naming,java.rmi,java.security.jgss,java.security.sasl,java.sql,jdk.jconsole,jdk.unsupported \
 --compress 2 --no-header-files --no-man-pages --output target/runtime-image
 
-FROM alpine:3.8
+FROM alpine:3.8 as release
 
 COPY --from=build /app/target/runtime-image /app
 
