@@ -61,7 +61,7 @@ jobs:
             --target release \
             --push \
             .
-
+            
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
         env:
