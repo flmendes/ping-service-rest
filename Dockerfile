@@ -1,4 +1,4 @@
-FROM maven:3.6-jdk-12-alpine as build
+FROM maven:3.8-openjdk-11-slim as build
 
 WORKDIR /app
 COPY pom.xml .
