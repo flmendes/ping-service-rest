@@ -18,7 +18,7 @@ spec:
         app: ping-service-rest
     spec:
       containers:
-        - image: ECR_REPOSITORY/station/spring-boot-app
+        - image: ECR_REPOSITORY
           name: ping-service-rest
           resources: {}
           ports:
@@ -36,19 +36,19 @@ spec:
               exec:
                 command: ["sh", "-c", "sleep 10"]
 status: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ping-service-rest
-  labels:
-    app: ping-service-rest
-spec:
-  type: NodePort
-  ports:
-    - port: 8090
-      protocol: TCP
-      targetPort: 8080
-      nodePort: 31002
-  selector:
-    app: ping-service-rest
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: ping-service-rest
+#  labels:
+#    app: ping-service-rest
+#spec:
+#  type: NodePort
+#  ports:
+#    - port: 8090
+#      protocol: TCP
+#      targetPort: 8080
+#      nodePort: 31002
+#  selector:
+#    app: ping-service-rest
