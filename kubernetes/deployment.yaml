@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ping-service-rest
+  name: ping-service-rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ping-service-rest
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ping-service-rest
+    spec:
+      containers:
+        - image: ECR_REPOSITORY/station/spring-boot-app
+          name: ping-service-rest
+          resources: {}
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 10"]
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ping-service-rest
+  labels:
+    app: ping-service-rest
+spec:
+  type: NodePort
+  ports:
+    - port: 8090
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 31002
+  selector:
+    app: ping-service-rest
