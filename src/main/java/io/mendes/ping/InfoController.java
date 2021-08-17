@@ -1,5 +1,6 @@
 package io.mendes.ping;
 
+import io.mendes.ping.model.ServiceInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class InfoController {
     @GetMapping("/info")
     public ServiceInfo getInfo() {
         return new ServiceInfo(
-                "C4P Service (REST)",
+                "Ping Service",
                 "v"+version,
                 "https://github.com/flmendes/ping-service-rest/releases/tag/v" + version,
                 podId,
