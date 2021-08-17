@@ -14,8 +14,14 @@ public class PingController {
     }
 
     @GetMapping("/ping")
+    public String sayPing(){
+        metrics.getPings().increment();
+        return "Ping....";
+    }
+
+    @GetMapping("/pong")
     public String sayPong(){
         metrics.getPings().increment();
-        return "Pong";
+        return "Pong....";
     }
 }
