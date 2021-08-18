@@ -15,6 +15,5 @@ COPY --from=build /app/target/runtime-image /app
 COPY --from=build /app/target/ping-service-rest-0.0.1-SNAPSHOT.jar \
                   /app/ping-service-rest.jar
 
-ENTRYPOINT ["/app/bin/java", "-jar"]
-CMD ["/app/ping-service-rest.jar"]
+ENTRYPOINT ["/app/bin/java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/ping-service-rest.jar"]
 
