@@ -65,13 +65,15 @@ jobs:
             
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-          
-      - name: Deploy to Kubernetes cluster
-        uses: kodermax/kubectl-aws-eks@master
+
+      -name: Change image version
         env:
           RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
         run: |
           sed -i'' -e 's/ECR_REPOSITORY/${{ env.RELEASE_IMAGE }}/g' k8s.yaml
+
+      - name: Deploy to Kubernetes cluster
+        uses: kodermax/kubectl-aws-eks@master
         with:
           args: apply -f k8s.yaml -n $KUBE_NAMESPACE
 #          args: set image deployment/ping-service-rest ping-service-rest=${{ env.RELEASE_IMAGE }} -n $KUBE_NAMESPACE
