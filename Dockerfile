@@ -17,3 +17,4 @@ COPY --from=build /app/target/ping-service-rest-0.0.1-SNAPSHOT.jar \
 
 ENTRYPOINT ["/app/bin/java", "-jar"]
 CMD ["/app/ping-service-rest.jar"]
+
