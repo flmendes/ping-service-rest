@@ -76,4 +76,4 @@ jobs:
       - name: Verify Kubernetes deployment
         uses: kodermax/kubectl-aws-eks@master
         with:
-          args: rollout status deploy ping-service-rest -n $KUBE_NAMESPACE
+          args: rollout status deployment/ping-service-rest -n $KUBE_NAMESPACE
