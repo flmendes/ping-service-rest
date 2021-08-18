@@ -76,7 +76,6 @@ jobs:
         uses: kodermax/kubectl-aws-eks@master
         with:
           args: apply -f k8s.yaml -n $KUBE_NAMESPACE
-#          args: set image deployment/ping-service-rest ping-service-rest=${{ env.RELEASE_IMAGE }} -n $KUBE_NAMESPACE
 
       - name: Verify Kubernetes deployment
         uses: kodermax/kubectl-aws-eks@master
