@@ -19,6 +19,7 @@ spec:
     spec:
       containers:
         - image: ECR_REPOSITORY
+          imagePullPolicy: Always
           name: ping-service-rest
           resources: {}
           ports:

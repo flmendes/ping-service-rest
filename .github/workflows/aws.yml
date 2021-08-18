@@ -70,8 +70,11 @@ jobs:
         uses: kodermax/kubectl-aws-eks@master
         env:
           RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
+        run: |
+          sed -i'' -e 's/ECR_REPOSITORY/${{ env.RELEASE_IMAGE }}/g' k8s.yaml
         with:
-          args: set image deployment/ping-service-rest ping-service-rest=${{ env.RELEASE_IMAGE }} -n $KUBE_NAMESPACE
+          args: apply -f k8s.yaml -n $KUBE_NAMESPACE
+#          args: set image deployment/ping-service-rest ping-service-rest=${{ env.RELEASE_IMAGE }} -n $KUBE_NAMESPACE
 
       - name: Verify Kubernetes deployment
         uses: kodermax/kubectl-aws-eks@master
